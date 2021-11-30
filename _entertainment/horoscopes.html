@@ -1,0 +1,29 @@
+---
+layout: page
+title: Horoscopes
+image: "/assets/img/dino-game.png"
+---
+
+<style>
+    .warning-button {
+        margin:10px
+    }
+</style>
+
+<center>
+    <h2>WARNING</h2>
+    <p><em>The Flounder accepts no responsibility for the accuracy of today’s horoscope. Please remember that you are a walking bag of meat and the movement of stars hundreds of light years away most likely will not have any impact on your life. Side effects of reading these horoscopes may include severe negativity from our astrologer and a poor mark in Data Management. If your belief in astrology lasts more than four hours, please consult a science textbook.</em></p>
+    <button class="warning-button" onclick="riskAccepted()">Accept the Risk and Continue</button>
+</center>
+
+<div id="horoscopes" style="display:none">
+    <h2>ree</h2>
+    <p>SECRET STUFF</p>
+</div>
+
+<script>
+    function riskAccepted(){
+        document.getElementById("horoscopes").style.display = "block";
+        alert("baf");
+    }
+</script>
