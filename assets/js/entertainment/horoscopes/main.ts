@@ -1,6 +1,6 @@
 function riskAccepted() {
   document.getElementById("horoscopes")!.style.display = "block";
-  alert("baf");
+  document.getElementById("warning-button")!.style.display = "none";
   const DATA = [
     new Horoscope(
       "Aries",
@@ -75,6 +75,9 @@ function riskAccepted() {
       "The moon is waning and Mackenzus is in its second semester. Change is good, but only sometimes. Go to school, spend time with friends, and read The Flounder."
     ),
   ];
+  document.getElementById("horoscope-name")!.innerHTML = DATA[0].name;
+  document.getElementById("horoscope-description")!.innerHTML =
+    DATA[0].description;
 }
 
 enum Month {

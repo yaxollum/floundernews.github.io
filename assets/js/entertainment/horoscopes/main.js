@@ -1,7 +1,7 @@
 "use strict";
 function riskAccepted() {
     document.getElementById("horoscopes").style.display = "block";
-    alert("baf");
+    document.getElementById("warning-button").style.display = "none";
     const DATA = [
         new Horoscope("Aries", new CalendarDate(Month.March, 21), new CalendarDate(Month.April, 19), "Hot-headed as your sign, the Ram. Be kind this week and avoid butting heads. Remember to get sheared regularly to avoid overheating."),
         new Horoscope("Taurus", new CalendarDate(Month.April, 20), new CalendarDate(Month.May, 20), "Ambitious and determined, this year try to chill out a bit. High blood pressure will only harm you long term. Your friends all think you’re a try-hard. Only wear plaid this week, or else."),
@@ -16,6 +16,9 @@ function riskAccepted() {
         new Horoscope("Aquarius", new CalendarDate(Month.January, 20), new CalendarDate(Month.February, 18), "You’ve worked yourself crazy all year, so sleep in and unwind this winter break. You will find this difficult now that the break is over. Scorpio’s talking trash about you."),
         new Horoscope("Pisces", new CalendarDate(Month.February, 19), new CalendarDate(Month.March, 20), "The moon is waning and Mackenzus is in its second semester. Change is good, but only sometimes. Go to school, spend time with friends, and read The Flounder."),
     ];
+    document.getElementById("horoscope-name").innerHTML = DATA[0].name;
+    document.getElementById("horoscope-description").innerHTML =
+        DATA[0].description;
 }
 var Month;
 (function (Month) {
