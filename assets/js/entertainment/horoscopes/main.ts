@@ -14,7 +14,7 @@ enum Month {
 }
 
 class CalendarDate {
-  constructor(public month: Month, public day: number) { }
+  constructor(public month: Month, public day: number) {}
 }
 
 class Horoscope {
@@ -23,7 +23,7 @@ class Horoscope {
     public firstDate: CalendarDate,
     public lastDate: CalendarDate,
     public description: string
-  ) { }
+  ) {}
 }
 
 const DATA = [
@@ -102,18 +102,22 @@ const DATA = [
 ];
 
 function showHoroscopeTab(index: number) {
-  document.getElementById("horoscope-name")!.innerHTML = DATA[index].name;
+  const horoscopeName = DATA[index].name;
+  document.getElementById("horoscope-name")!.innerHTML = horoscopeName;
   document.getElementById("horoscope-description")!.innerHTML =
     DATA[index].description;
-  let image = document.getElementById("horoscope-img")! as HTMLImageElement
-  image.src = `/assets/img/horoscopes/${index}.svg`
+  let image = document.getElementById("horoscope-img")! as HTMLImageElement;
+  image.src = `/assets/img/horoscopes/${index}.svg`;
+  document.getElementById(
+    "horoscope-img-attribution"
+  )!.innerHTML = `<a href="https://commons.wikimedia.org/wiki/File:${horoscopeName}_symbol_(Moskowitz,_fixed_width).svg">${horoscopeName} symbol</a> by <a href="https://commons.wikimedia.org/wiki/User:Kwamikagami">Denis Moskowitz</a> is licensed under the <a href="https://creativecommons.org/licenses/by-sa/4.0/deed.en">CC BY-SA 4.0</a>.`;
 }
 
 function addHoroscopeButtonToDocument(h: Horoscope, index: number) {
-  let button = document.createElement("button")
-  button.innerText = h.name
-  button.onclick = () => showHoroscopeTab(index)
-  document.getElementById("horoscope-tabs")!.appendChild(button)
+  let button = document.createElement("button");
+  button.innerText = h.name;
+  button.onclick = () => showHoroscopeTab(index);
+  document.getElementById("horoscope-tabs")!.appendChild(button);
 }
 
 function riskAccepted() {
@@ -121,9 +125,4 @@ function riskAccepted() {
   document.getElementById("warning-button")!.style.display = "none";
 
   DATA.forEach(addHoroscopeButtonToDocument);
-
-
-
 }
-
-

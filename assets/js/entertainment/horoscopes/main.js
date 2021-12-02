@@ -43,11 +43,13 @@ const DATA = [
     new Horoscope("Pisces", new CalendarDate(Month.February, 19), new CalendarDate(Month.March, 20), "The moon is waning and Mackenzus is in its second semester. Change is good, but only sometimes. Go to school, spend time with friends, and read The Flounder."),
 ];
 function showHoroscopeTab(index) {
-    document.getElementById("horoscope-name").innerHTML = DATA[index].name;
+    const horoscopeName = DATA[index].name;
+    document.getElementById("horoscope-name").innerHTML = horoscopeName;
     document.getElementById("horoscope-description").innerHTML =
         DATA[index].description;
     let image = document.getElementById("horoscope-img");
     image.src = `/assets/img/horoscopes/${index}.svg`;
+    document.getElementById("horoscope-img-attribution").innerHTML = `<a href="https://commons.wikimedia.org/wiki/File:${horoscopeName}_symbol_(Moskowitz,_fixed_width).svg">${horoscopeName} symbol</a> by <a href="https://commons.wikimedia.org/wiki/User:Kwamikagami">Denis Moskowitz</a> is licensed under the <a href="https://creativecommons.org/licenses/by-sa/4.0/deed.en">CC BY-SA 4.0</a>.`;
 }
 function addHoroscopeButtonToDocument(h, index) {
     let button = document.createElement("button");
