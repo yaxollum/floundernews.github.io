@@ -46,6 +46,8 @@ function showHoroscopeTab(index) {
     document.getElementById("horoscope-name").innerHTML = DATA[index].name;
     document.getElementById("horoscope-description").innerHTML =
         DATA[index].description;
+    let image = document.getElementById("horoscope-img");
+    image.src = `/assets/img/horoscopes/${index}.svg`;
 }
 function addHoroscopeButtonToDocument(h, index) {
     let button = document.createElement("button");

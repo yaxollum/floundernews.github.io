@@ -105,6 +105,8 @@ function showHoroscopeTab(index: number) {
   document.getElementById("horoscope-name")!.innerHTML = DATA[index].name;
   document.getElementById("horoscope-description")!.innerHTML =
     DATA[index].description;
+  let image = document.getElementById("horoscope-img")! as HTMLImageElement
+  image.src = `/assets/img/horoscopes/${index}.svg`
 }
 
 function addHoroscopeButtonToDocument(h: Horoscope, index: number) {
