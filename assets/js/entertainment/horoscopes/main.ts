@@ -101,16 +101,22 @@ const DATA = [
   ),
 ];
 
+function getAttributionMessage(horoscopeName: string) {
+  return `<a href="https://commons.wikimedia.org/wiki/File:${horoscopeName}_symbol_(Moskowitz,_fixed_width).svg">${horoscopeName} symbol</a> by <a href="https://commons.wikimedia.org/wiki/User:Kwamikagami">Denis Moskowitz</a> is licensed under <a href="https://creativecommons.org/licenses/by-sa/4.0/deed.en">CC BY-SA 4.0</a>.`;
+}
+
 function showHoroscopeTab(index: number) {
-  const horoscopeName = DATA[index].name;
-  document.getElementById("horoscope-name")!.innerHTML = horoscopeName;
+  const horoscope = DATA[index];
+  document.getElementById("horoscope-name")!.innerHTML = horoscope.name;
+  document.getElementById(
+    "horoscope-dates"
+  )!.innerHTML = `${horoscope.firstDate} – ${horoscope.lastDate}`;
   document.getElementById("horoscope-description")!.innerHTML =
-    DATA[index].description;
+    horoscope.description;
   let image = document.getElementById("horoscope-img")! as HTMLImageElement;
   image.src = `/assets/img/horoscopes/${index}.svg`;
-  document.getElementById(
-    "horoscope-img-attribution"
-  )!.innerHTML = `<a href="https://commons.wikimedia.org/wiki/File:${horoscopeName}_symbol_(Moskowitz,_fixed_width).svg">${horoscopeName} symbol</a> by <a href="https://commons.wikimedia.org/wiki/User:Kwamikagami">Denis Moskowitz</a> is licensed under the <a href="https://creativecommons.org/licenses/by-sa/4.0/deed.en">CC BY-SA 4.0</a>.`;
+  document.getElementById("horoscope-img-attribution")!.innerHTML =
+    getAttributionMessage(horoscope.name);
 }
 
 function addHoroscopeButtonToDocument(h: Horoscope, index: number) {

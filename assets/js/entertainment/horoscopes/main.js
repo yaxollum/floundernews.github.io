@@ -42,14 +42,19 @@ const DATA = [
     new Horoscope("Aquarius", new CalendarDate(Month.January, 20), new CalendarDate(Month.February, 18), "You’ve worked yourself crazy all year, so sleep in and unwind this winter break. You will find this difficult now that the break is over. Scorpio’s talking trash about you."),
     new Horoscope("Pisces", new CalendarDate(Month.February, 19), new CalendarDate(Month.March, 20), "The moon is waning and Mackenzus is in its second semester. Change is good, but only sometimes. Go to school, spend time with friends, and read The Flounder."),
 ];
+function getAttributionMessage(horoscopeName) {
+    return `<a href="https://commons.wikimedia.org/wiki/File:${horoscopeName}_symbol_(Moskowitz,_fixed_width).svg">${horoscopeName} symbol</a> by <a href="https://commons.wikimedia.org/wiki/User:Kwamikagami">Denis Moskowitz</a> is licensed under <a href="https://creativecommons.org/licenses/by-sa/4.0/deed.en">CC BY-SA 4.0</a>.`;
+}
 function showHoroscopeTab(index) {
-    const horoscopeName = DATA[index].name;
-    document.getElementById("horoscope-name").innerHTML = horoscopeName;
+    const horoscope = DATA[index];
+    document.getElementById("horoscope-name").innerHTML = horoscope.name;
+    document.getElementById("horoscope-dates").innerHTML = `${horoscope.firstDate} – ${horoscope.lastDate}`;
     document.getElementById("horoscope-description").innerHTML =
-        DATA[index].description;
+        horoscope.description;
     let image = document.getElementById("horoscope-img");
     image.src = `/assets/img/horoscopes/${index}.svg`;
-    document.getElementById("horoscope-img-attribution").innerHTML = `<a href="https://commons.wikimedia.org/wiki/File:${horoscopeName}_symbol_(Moskowitz,_fixed_width).svg">${horoscopeName} symbol</a> by <a href="https://commons.wikimedia.org/wiki/User:Kwamikagami">Denis Moskowitz</a> is licensed under the <a href="https://creativecommons.org/licenses/by-sa/4.0/deed.en">CC BY-SA 4.0</a>.`;
+    document.getElementById("horoscope-img-attribution").innerHTML =
+        getAttributionMessage(horoscope.name);
 }
 function addHoroscopeButtonToDocument(h, index) {
     let button = document.createElement("button");
