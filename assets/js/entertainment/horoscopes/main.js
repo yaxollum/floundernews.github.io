@@ -19,6 +19,9 @@ class CalendarDate {
         this.month = month;
         this.day = day;
     }
+    toString() {
+        return `${Month[this.month]} ${this.day}`;
+    }
 }
 class Horoscope {
     constructor(name, firstDate, lastDate, description) {

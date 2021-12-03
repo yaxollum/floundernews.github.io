@@ -15,6 +15,9 @@ enum Month {
 
 class CalendarDate {
   constructor(public month: Month, public day: number) {}
+  public toString() {
+    return `${Month[this.month]} ${this.day}`;
+  }
 }
 
 class Horoscope {
