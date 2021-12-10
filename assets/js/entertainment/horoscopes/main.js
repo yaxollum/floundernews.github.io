@@ -62,6 +62,7 @@ function showHoroscopeTab(index) {
 function addHoroscopeButtonToDocument(h, index) {
     let button = document.createElement("button");
     button.innerText = h.name;
+    button.className = "horoscope-tab";
     button.onclick = () => showHoroscopeTab(index);
     document.getElementById("horoscope-tabs").appendChild(button);
 }

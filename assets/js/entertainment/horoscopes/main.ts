@@ -125,6 +125,7 @@ function showHoroscopeTab(index: number) {
 function addHoroscopeButtonToDocument(h: Horoscope, index: number) {
   let button = document.createElement("button");
   button.innerText = h.name;
+  button.className = "horoscope-tab";
   button.onclick = () => showHoroscopeTab(index);
   document.getElementById("horoscope-tabs")!.appendChild(button);
 }

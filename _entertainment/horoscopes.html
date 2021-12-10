@@ -5,10 +5,33 @@ image: "/assets/img/dino-game.png"
 ---
 
 <style>
-  .warning-button {
+  #warning-button {
     margin: 10px;
   }
+  #horoscope-img {
+    width: 50px;
+    filter: invert(100%);
+    display: inline;
+    vertical-align: middle;
+  }
+  #horoscope-name {
+    display: inline;
+    vertical-align: middle;
+  }
+  #horoscope-dates {
+    display: inline;
+  }
+  .horoscope-tab {
+    background-color: transparent;
+    color: white;
+    padding: 10px;
+    font-size: 16px;
+  }
 </style>
+
+{% for i in (0..11) %}
+<link rel="preload" href="/assets/img/horoscopes/{{i}}.svg" as="image" />
+{% endfor %}
 
 <center>
   <h2>WARNING</h2>
@@ -23,18 +46,22 @@ image: "/assets/img/dino-game.png"
       consult a science textbook.</em
     >
   </p>
-  <button id="warning-button" class="warning-button" onclick="riskAccepted()">
+  <button id="warning-button" onclick="riskAccepted()">
     Accept the Risk and Continue
   </button>
 </center>
-
+<br />
 <div id="horoscopes" style="display: none">
   <div class="tabs" id="horoscope-tabs"></div>
-  <img id="horoscope-img" />
-  <h2 id="horoscope-name"></h2>
-  <p id="horoscope-dates"></p>
+  <br />
+  <div>
+    <img id="horoscope-img" />
+    <h2 id="horoscope-name"></h2>
+    <p id="horoscope-dates"></p>
+  </div>
   <p id="horoscope-description"></p>
+  <br />
   <p id="horoscope-img-attribution"></p>
-</div>
 
-<script src="/assets/js/entertainment/horoscopes/main.js"></script>
+  <script src="/assets/js/entertainment/horoscopes/main.js"></script>
+</div>
