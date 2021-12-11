@@ -16,7 +16,7 @@ enum Month {
 class CalendarDate {
   constructor(public month: Month, public day: number) {}
   public toString() {
-    return `${Month[this.month]} ${this.day}`;
+    return `${Month[this.month].substr(0, 3)} ${this.day}`;
   }
 }
 
@@ -108,12 +108,24 @@ function getAttributionMessage(horoscopeName: string) {
   return `<a href="https://commons.wikimedia.org/wiki/File:${horoscopeName}_symbol_(Moskowitz,_fixed_width).svg">${horoscopeName} symbol</a> by <a href="https://commons.wikimedia.org/wiki/User:Kwamikagami">Denis Moskowitz</a> is licensed under <a href="https://creativecommons.org/licenses/by-sa/4.0/deed.en">CC BY-SA 4.0</a>.`;
 }
 
+function highlightHoroscopeTab(name: string) {
+  let tabs = document.getElementsByClassName("horoscope-tab");
+  for (let tab of tabs) {
+    if (tab.innerHTML == name) {
+      tab.className = "horoscope-tab tab-selected";
+    } else {
+      tab.className = "horoscope-tab";
+    }
+  }
+}
+
 function showHoroscopeTab(index: number) {
   const horoscope = DATA[index];
+  highlightHoroscopeTab(horoscope.name);
   document.getElementById("horoscope-name")!.innerHTML = horoscope.name;
   document.getElementById(
     "horoscope-dates"
-  )!.innerHTML = `${horoscope.firstDate} – ${horoscope.lastDate}`;
+  )!.innerHTML = `(${horoscope.firstDate} – ${horoscope.lastDate})`;
   document.getElementById("horoscope-description")!.innerHTML =
     horoscope.description;
   let image = document.getElementById("horoscope-img")! as HTMLImageElement;
@@ -132,7 +144,7 @@ function addHoroscopeButtonToDocument(h: Horoscope, index: number) {
 
 function riskAccepted() {
   document.getElementById("horoscopes")!.style.display = "";
-  document.getElementById("warning-button")!.style.display = "none";
+  document.getElementById("warning")!.style.display = "none";
 
   DATA.forEach(addHoroscopeButtonToDocument);
 }
