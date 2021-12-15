@@ -3,7 +3,7 @@ layout: article
 author: "Tai Nhi"
 title: "Short Stairs for Short People"
 description: "The first step to a better Mackenzie."
-image:
+image: /assets/img/2021-12-10-short-stairs.png
 order:
 ---
 
