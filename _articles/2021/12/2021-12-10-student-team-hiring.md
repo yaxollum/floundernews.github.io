@@ -4,7 +4,7 @@ layout: article
 author: "Carol O. Ulrich-Patterson, World News Writer"
 title: "Student-run team takes over hiring process for staff"
 description: "Averages skyrocket to 145%, leading the nation's education system."
-image:
+image: /assets/img/2021-12-10-student-team-hiring.png
 order:
 ---
 
