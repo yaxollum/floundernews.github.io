@@ -1,7 +1,7 @@
 ---
 layout: article
 title: "Class Competitions"
-image: "/assets/img/2021-12-06-class-competitions.jpg"
+image: "/assets/img/2021-12-15-class-competitions.jpg"
 order: 
 ---
 

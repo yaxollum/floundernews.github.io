@@ -1,7 +1,7 @@
 ---
 layout: article
 title: "Spot the Differences!"
-image: "/assets/img/2021-12-06-spot-the-differences.png"
+image: "/assets/img/2021-12-15-spot-the-differences.png"
 order: 
 ---
 

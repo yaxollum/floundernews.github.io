@@ -1,7 +1,7 @@
 ---
 layout: article
 title: "Nice Fermented Vegetables"
-image: /assets/img/2021-12-08-nice-fermented-vegetables.png
+image: /assets/img/2021-12-15-nice-fermented-vegetables.png
 order: 
 ---
 

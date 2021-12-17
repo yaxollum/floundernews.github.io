@@ -3,7 +3,7 @@ layout: article
 author: "Piscine Molitor Patel"
 title: "Plain Misbehavior or Something Deeper? Student Explains How Locked Washrooms Prove the Mackenzie Swimming Pool Exists"
 description: "Facts don’t care about your feelings, and the fact is that the pool has always been there."
-image: /assets/img/2021-12-12-secret-pool.png
+image: /assets/img/2021-12-15-secret-pool.png
 order:
 ---
 

@@ -3,7 +3,7 @@ layout: article
 author: "Anonymous Toronto Privat Helth Column Writer"
 title: "Students With Faces in Hands as Midterm Marks Distributed"
 description: "The darn kids are not taking COVID seriously"
-image: /assets/img/2021-12-10-disappointing-midterm-marks.png
+image: /assets/img/2021-12-15-disappointing-midterm-marks.png
 order:
 ---
 
