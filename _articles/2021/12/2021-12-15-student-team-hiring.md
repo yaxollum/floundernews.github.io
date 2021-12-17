@@ -1,4 +1,3 @@
-
 ---
 layout: article
 author: "Carol O. Ulrich-Patterson, World News Writer"
