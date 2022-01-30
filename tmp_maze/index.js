@@ -1,7 +1,7 @@
 "use strict";
 console.log("hello!");
-const cols = 10;
-const rows = 10;
+const cols = 20;
+const rows = 20;
 let boxSize;
 let ctx;
 function coordToId(x, y) {
@@ -34,8 +34,11 @@ function paintCanvas() {
     ctx.rect(boxSize, boxSize, boxSize * cols, boxSize * rows);
     ctx.stroke();
     let unionFind = [];
+    let adj = [];
+    let prev = [];
     for (let i = 0; i < cols * rows; ++i) {
         unionFind[i] = i;
+        adj[i] = [];
     }
     let getParent = (u) => {
         if (unionFind[u] == u) {
@@ -74,23 +77,54 @@ function paintCanvas() {
         [walls[i], walls[j]] = [walls[j], walls[i]];
     }
     let mazeWalls = [];
+    let startCell = coordToId(0, 0);
+    let endCell = coordToId(cols - 1, rows - 1);
     for (let wall of walls) {
         if (getParent(wall.u) == getParent(wall.v)) {
             mazeWalls.push(wall);
         }
         else {
             joinSets(wall.u, wall.v);
+            adj[wall.u].push(wall.v);
+            adj[wall.v].push(wall.u);
         }
     }
+    let dfs = (u, parent) => {
+        prev[u] = parent;
+        for (let v of adj[u]) {
+            if (v != parent) {
+                dfs(v, u);
+            }
+        }
+    };
+    dfs(startCell, startCell);
+    let path = [];
+    let i = endCell;
+    while (i != startCell) {
+        path.push(i);
+        i = prev[i];
+    }
+    let indexCut = Math.floor(path.length / 2);
+    let uCutWall = path[indexCut];
+    let vCutWall = path[indexCut + 1];
+    let [ux, uy] = idToCoord(uCutWall);
+    let [vx, vy] = idToCoord(vCutWall);
+    ctx.strokeStyle = "red";
+    if (ux == vx) {
+        drawGridLine(ux, (uy + vy + 1) / 2, ux + 1, (uy + vy + 1) / 2);
+    }
+    else if (uy == vy) {
+        drawGridLine((ux + vx + 1) / 2, uy, (ux + vx + 1) / 2, uy + 1);
+    }
+    ctx.strokeStyle = "black";
     for (let wall of mazeWalls) {
         let [ux, uy] = idToCoord(wall.u);
         let [vx, vy] = idToCoord(wall.v);
-        console.log(ux, uy, vx, vy, wall.type);
         if (wall.type == "horizontal") {
-            drawGridLine(ux, uy + 1, ux + 1, uy + 1);
+            drawGridLine(ux, (uy + vy + 1) / 2, ux + 1, (uy + vy + 1) / 2);
         }
         else {
-            drawGridLine(ux + 1, uy, ux + 1, uy + 1);
+            drawGridLine((ux + vx + 1) / 2, uy, (ux + vx + 1) / 2, uy + 1);
         }
     }
 }
