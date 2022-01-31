@@ -1,7 +1,10 @@
 console.log("hello!");
 
-const cols = 20;
-const rows = 20;
+const cols = 8;
+const rows = 8;
+
+let currentPositionId = 0;
+let adj: number[][] = [];
 
 let boxSize: number;
 let ctx: CanvasRenderingContext2D;
@@ -49,8 +52,9 @@ function paintCanvas() {
   ctx.rect(boxSize, boxSize, boxSize * cols, boxSize * rows);
   ctx.stroke();
 
+  drawCharacter(false);
+
   let unionFind: number[] = [];
-  let adj: number[][] = [];
   let prev: number[] = [];
   for (let i = 0; i < cols * rows; ++i) {
     unionFind[i] = i;
@@ -127,6 +131,8 @@ function paintCanvas() {
   let indexCut = Math.floor(path.length / 2);
   let uCutWall = path[indexCut];
   let vCutWall = path[indexCut + 1];
+  adj[uCutWall].splice(adj[uCutWall].indexOf(vCutWall), 1);
+  adj[vCutWall].splice(adj[vCutWall].indexOf(uCutWall), 1);
   let [ux, uy] = idToCoord(uCutWall);
   let [vx, vy] = idToCoord(vCutWall);
   ctx.strokeStyle = "red";
@@ -147,5 +153,42 @@ function paintCanvas() {
     }
   }
 }
+
+function drawCharacter(erase: boolean) {
+  let [current_x, current_y] = idToCoord(currentPositionId);
+  ctx.beginPath();
+  ctx.arc(
+    (current_x + 1.5) * boxSize,
+    (current_y + 1.5) * boxSize,
+    erase ? boxSize / 2.5 : boxSize / 3,
+    0,
+    2 * Math.PI
+  );
+  ctx.fillStyle = erase ? "white" : "green";
+  ctx.fill();
+}
+window.addEventListener("keydown", (e) => {
+  e.preventDefault();
+  let delta_x = 0;
+  let delta_y = 0;
+  if (e.key == "ArrowLeft" || e.key == "a") {
+    delta_x = -1;
+  } else if (e.key == "ArrowRight" || e.key == "d") {
+    delta_x = 1;
+  } else if (e.key == "ArrowUp" || e.key == "w") {
+    delta_y = -1;
+  } else if (e.key == "ArrowDown" || e.key == "s") {
+    delta_y = 1;
+  }
+  console.log(delta_x, delta_y);
+  let [current_x, current_y] = idToCoord(currentPositionId);
+  let [new_x, new_y] = [current_x + delta_x, current_y + delta_y];
+  let newPositionId = coordToId(new_x, new_y);
+  if (adj[currentPositionId].includes(newPositionId)) {
+    drawCharacter(true);
+    currentPositionId = newPositionId;
+    drawCharacter(false);
+  }
+});
 
 window.onload = paintCanvas;
