@@ -7,6 +7,8 @@ let rows;
 let boxSize;
 let c;
 let ctx;
+let arrowImage = new Image();
+let seaweedImage = new Image();
 function coordToId(x, y) {
     return x * rows + y;
 }
@@ -39,7 +41,6 @@ function generateMaze() {
     let keyboardDisabled = false;
     rows = getInputNumOrDefault("maze-rows", 15);
     cols = getInputNumOrDefault("maze-cols", 15);
-    console.log(`${rows} ROWS ${cols} COLS`);
     boxSize = c.width / (cols + 2);
     c.height = boxSize * (rows + 2);
     let unionFind = [];
@@ -123,8 +124,18 @@ function generateMaze() {
     function drawMaze(drawImpossibleWall) {
         ctx.clearRect(0, 0, c.width, c.height);
         ctx.beginPath();
-        ctx.rect(boxSize, boxSize, boxSize * cols, boxSize * rows);
+        ctx.moveTo(boxSize * 2, boxSize);
+        ctx.lineTo(boxSize * (cols + 1), boxSize);
+        ctx.lineTo(boxSize * (cols + 1), boxSize * (rows + 1));
+        ctx.moveTo(boxSize * cols, boxSize * (rows + 1));
+        ctx.lineTo(boxSize, boxSize * (rows + 1));
+        ctx.lineTo(boxSize, boxSize);
         ctx.stroke();
+        drawArrow();
+        drawSeaweed();
+        ctx.font = `${boxSize / 3}px Arial`;
+        ctx.fillText("START", boxSize, boxSize * 0.8);
+        ctx.fillText("END", boxSize * (cols + 0.1), boxSize * (rows + 1.5));
         if (drawImpossibleWall) {
             let wallLine = [0, 0, 0, 0];
             if (ux == vx) {
@@ -191,7 +202,17 @@ function generateMaze() {
         ctx.stroke();
     };
 }
+function drawBoxImage(image, x, y) {
+    ctx.drawImage(image, boxSize * (x + 0.1), boxSize * (y + 0.1), boxSize * 0.8, boxSize * 0.8);
+}
+function drawArrow() {
+    drawBoxImage(arrowImage, 1, 1);
+}
+function drawSeaweed() {
+    drawBoxImage(seaweedImage, cols, rows);
+}
 function drawCharacter(positionId, erase) {
+    drawArrow();
     let [current_x, current_y] = idToGridCoord(positionId);
     ctx.beginPath();
     ctx.arc(current_x, current_y, erase ? boxSize / 2.5 : boxSize / 3, 0, 2 * Math.PI);
@@ -209,5 +230,7 @@ window.onload = () => {
         DEFAULT_ROWS.toString();
     document.getElementById("maze-cols").value =
         DEFAULT_COLS.toString();
+    arrowImage.src = "arrow.svg";
+    seaweedImage.src = "seaweed.png";
 };
 document.getElementById("generate-maze").onclick = generateMaze;
