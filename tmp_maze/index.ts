@@ -9,8 +9,6 @@ let boxSize: number;
 let c: HTMLCanvasElement;
 let ctx: CanvasRenderingContext2D;
 
-let arrowImage = new Image();
-
 let seaweedImage = new Image();
 
 interface Wall {
@@ -152,7 +150,6 @@ function generateMaze() {
     ctx.lineTo(boxSize, boxSize);
     ctx.stroke();
 
-    drawArrow();
     drawSeaweed();
 
     ctx.font = `${boxSize / 3}px Arial`;
@@ -233,16 +230,12 @@ function drawBoxImage(image: HTMLImageElement, x: number, y: number) {
     boxSize * 0.8
   );
 }
-function drawArrow() {
-  drawBoxImage(arrowImage, 1, 1);
-}
 
 function drawSeaweed() {
   drawBoxImage(seaweedImage, cols, rows);
 }
 
 function drawCharacter(positionId: number, erase: boolean) {
-  drawArrow();
   let [current_x, current_y] = idToGridCoord(positionId);
   ctx.beginPath();
   ctx.arc(
@@ -267,7 +260,7 @@ window.onload = () => {
     DEFAULT_ROWS.toString();
   (document.getElementById("maze-cols") as HTMLInputElement).value =
     DEFAULT_COLS.toString();
-  arrowImage.src = "arrow.svg";
+
   seaweedImage.src = "seaweed.png";
 };
 
