@@ -9,8 +9,8 @@ let boxSize: number;
 let c: HTMLCanvasElement;
 let ctx: CanvasRenderingContext2D;
 
-let seaweedImage = new Image();
-
+let flagImage = new Image();
+let turtleImage = new Image();
 interface Wall {
   u: number;
   v: number;
@@ -175,7 +175,7 @@ function generateMaze() {
         drawGridLine((ux + vx + 1) / 2, uy, (ux + vx + 1) / 2, uy + 1);
       }
     }
-    drawCharacter(currentPositionId, false);
+    drawCharacter(currentPositionId);
   }
   drawMaze(true);
 
@@ -201,9 +201,9 @@ function generateMaze() {
     let [new_x, new_y] = [current_x + delta_x, current_y + delta_y];
     let newPositionId = coordToId(new_x, new_y);
     if (adj[currentPositionId].includes(newPositionId)) {
-      drawCharacter(currentPositionId, true);
-      drawCharacter(newPositionId, false);
+      eraseCharacter(currentPositionId);
       currentPositionId = newPositionId;
+      drawCharacter(currentPositionId);
     }
   };
 
@@ -222,31 +222,37 @@ function generateMaze() {
 }
 
 function drawBoxImage(image: HTMLImageElement, x: number, y: number) {
+  let [imgWidth, imgHeight] =
+    image.width > image.height
+      ? [boxSize * 0.8, (boxSize * 0.8 * image.height) / image.width]
+      : [(boxSize * 0.8 * image.width) / image.height, boxSize * 0.8];
+
   ctx.drawImage(
     image,
-    boxSize * (x + 0.1),
-    boxSize * (y + 0.1),
-    boxSize * 0.8,
-    boxSize * 0.8
+    boxSize * x + (boxSize - imgWidth) / 2,
+    boxSize * y + (boxSize - imgHeight) / 2,
+    imgWidth,
+    imgHeight
   );
 }
 
 function drawSeaweed() {
-  drawBoxImage(seaweedImage, cols, rows);
+  drawBoxImage(flagImage, cols, rows);
 }
 
-function drawCharacter(positionId: number, erase: boolean) {
-  let [current_x, current_y] = idToGridCoord(positionId);
-  ctx.beginPath();
-  ctx.arc(
-    current_x,
-    current_y,
-    erase ? boxSize / 2.5 : boxSize / 3,
-    0,
-    2 * Math.PI
+function drawCharacter(positionId: number) {
+  let [current_x, current_y] = idToCoord(positionId);
+  drawBoxImage(turtleImage, current_x + 1, current_y + 1);
+}
+
+function eraseCharacter(positionId: number) {
+  let [current_x, current_y] = idToCoord(positionId);
+  ctx.clearRect(
+    (current_x + 1.1) * boxSize,
+    (current_y + 1.1) * boxSize,
+    boxSize * 0.8,
+    boxSize * 0.8
   );
-  ctx.fillStyle = erase ? "white" : "green";
-  ctx.fill();
 }
 
 window.onload = () => {
@@ -261,7 +267,8 @@ window.onload = () => {
   (document.getElementById("maze-cols") as HTMLInputElement).value =
     DEFAULT_COLS.toString();
 
-  seaweedImage.src = "seaweed.png";
+  flagImage.src = "flag.png";
+  turtleImage.src = "turtle.png";
 };
 
 document.getElementById("generate-maze")!.onclick = generateMaze;
