@@ -1,5 +1,3 @@
-console.log("hello!");
-
 const DEFAULT_ROWS = 15;
 const DEFAULT_COLS = 15;
 let cols: number;
@@ -140,6 +138,7 @@ function generateMaze() {
   let [vx, vy] = idToCoord(vCutWall);
 
   function drawMaze(drawImpossibleWall: boolean) {
+    ctx.lineWidth = 3;
     ctx.clearRect(0, 0, c.width, c.height);
     ctx.beginPath();
     ctx.moveTo(boxSize * 2, boxSize);
@@ -256,7 +255,7 @@ function eraseCharacter(positionId: number) {
 }
 
 window.onload = () => {
-  let dpi = window.devicePixelRatio;
+  let dpi = 5;
   c = document.getElementById("maze-canvas") as HTMLCanvasElement;
   c.width *= dpi;
   c.height *= dpi;
