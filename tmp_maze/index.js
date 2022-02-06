@@ -6,8 +6,10 @@ let rows;
 let boxSize;
 let c;
 let ctx;
-let flagImage = new Image();
-let turtleImage = new Image();
+let moveCharacter = (delta_x, delta_y) => { };
+let showSolution = () => { };
+let flagImage;
+let turtleImage;
 function coordToId(x, y) {
     return x * rows + y;
 }
@@ -121,7 +123,8 @@ function generateMaze() {
     let [ux, uy] = idToCoord(uCutWall);
     let [vx, vy] = idToCoord(vCutWall);
     function drawMaze(drawImpossibleWall) {
-        ctx.lineWidth = 3;
+        ctx.strokeStyle = "black";
+        ctx.lineWidth = boxSize / 20;
         ctx.clearRect(0, 0, c.width, c.height);
         ctx.beginPath();
         ctx.moveTo(boxSize * 2, boxSize);
@@ -158,26 +161,9 @@ function generateMaze() {
         drawCharacter(currentPositionId);
     }
     drawMaze(true);
-    window.onkeydown = (e) => {
+    moveCharacter = (delta_x, delta_y) => {
         if (keyboardDisabled) {
             return;
-        }
-        let delta_x = 0;
-        let delta_y = 0;
-        if (e.key.startsWith("Arrow")) {
-            e.preventDefault();
-        }
-        if (e.key == "ArrowLeft" || e.key == "a") {
-            delta_x = -1;
-        }
-        else if (e.key == "ArrowRight" || e.key == "d") {
-            delta_x = 1;
-        }
-        else if (e.key == "ArrowUp" || e.key == "w") {
-            delta_y = -1;
-        }
-        else if (e.key == "ArrowDown" || e.key == "s") {
-            delta_y = 1;
         }
         let [current_x, current_y] = idToCoord(currentPositionId);
         let [new_x, new_y] = [current_x + delta_x, current_y + delta_y];
@@ -188,7 +174,7 @@ function generateMaze() {
             drawCharacter(currentPositionId);
         }
     };
-    document.getElementById("show-solution").onclick = () => {
+    showSolution = () => {
         keyboardDisabled = true;
         drawMaze(false);
         ctx.strokeStyle = "lightblue";
@@ -200,6 +186,7 @@ function generateMaze() {
         }
         ctx.stroke();
     };
+    document.getElementById("show-solution").onclick = showSolution;
 }
 function drawBoxImage(image, x, y) {
     let [imgWidth, imgHeight] = image.width > image.height
@@ -229,7 +216,45 @@ window.onload = () => {
         DEFAULT_ROWS.toString();
     document.getElementById("maze-cols").value =
         DEFAULT_COLS.toString();
-    flagImage.src = "flag.png";
-    turtleImage.src = "turtle.png";
+    flagImage = document.getElementById("flag-img");
+    turtleImage = document.getElementById("turtle-img");
+    generateMaze();
+};
+function hideOtherStuff() {
+    let otherStuff = document.getElementById("other-stuff");
+    if (otherStuff.style.display == "none") {
+        otherStuff.style.display = "";
+    }
+    else {
+        otherStuff.style.display = "none";
+    }
+}
+window.onkeydown = (e) => {
+    if (e.key == "ArrowLeft" || e.key == "a") {
+        moveCharacter(-1, 0);
+    }
+    else if (e.key == "ArrowRight" || e.key == "d") {
+        moveCharacter(1, 0);
+    }
+    else if (e.key == "ArrowUp" || e.key == "w") {
+        moveCharacter(0, -1);
+    }
+    else if (e.key == "ArrowDown" || e.key == "s") {
+        moveCharacter(0, 1);
+    }
+    else if (e.key == "g") {
+        generateMaze();
+    }
+    else if (e.key == "l") {
+        showSolution();
+    }
+    else if (e.key == "h") {
+        hideOtherStuff();
+    }
+    else {
+        return;
+    }
+    e.preventDefault();
 };
 document.getElementById("generate-maze").onclick = generateMaze;
+document.getElementById("hide-other-stuff").onclick = hideOtherStuff;

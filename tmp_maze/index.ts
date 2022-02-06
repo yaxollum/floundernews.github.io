@@ -6,9 +6,10 @@ let rows: number;
 let boxSize: number;
 let c: HTMLCanvasElement;
 let ctx: CanvasRenderingContext2D;
-
-let flagImage = new Image();
-let turtleImage = new Image();
+let moveCharacter = (delta_x: number, delta_y: number) => {};
+let showSolution = () => {};
+let flagImage: HTMLImageElement;
+let turtleImage: HTMLImageElement;
 interface Wall {
   u: number;
   v: number;
@@ -138,7 +139,8 @@ function generateMaze() {
   let [vx, vy] = idToCoord(vCutWall);
 
   function drawMaze(drawImpossibleWall: boolean) {
-    ctx.lineWidth = 3;
+    ctx.strokeStyle = "black";
+    ctx.lineWidth = boxSize / 20;
     ctx.clearRect(0, 0, c.width, c.height);
     ctx.beginPath();
     ctx.moveTo(boxSize * 2, boxSize);
@@ -178,23 +180,9 @@ function generateMaze() {
   }
   drawMaze(true);
 
-  window.onkeydown = (e) => {
+  moveCharacter = (delta_x: number, delta_y: number) => {
     if (keyboardDisabled) {
       return;
-    }
-    let delta_x = 0;
-    let delta_y = 0;
-    if (e.key.startsWith("Arrow")) {
-      e.preventDefault();
-    }
-    if (e.key == "ArrowLeft" || e.key == "a") {
-      delta_x = -1;
-    } else if (e.key == "ArrowRight" || e.key == "d") {
-      delta_x = 1;
-    } else if (e.key == "ArrowUp" || e.key == "w") {
-      delta_y = -1;
-    } else if (e.key == "ArrowDown" || e.key == "s") {
-      delta_y = 1;
     }
     let [current_x, current_y] = idToCoord(currentPositionId);
     let [new_x, new_y] = [current_x + delta_x, current_y + delta_y];
@@ -206,7 +194,7 @@ function generateMaze() {
     }
   };
 
-  document.getElementById("show-solution")!.onclick = () => {
+  showSolution = () => {
     keyboardDisabled = true;
     drawMaze(false);
     ctx.strokeStyle = "lightblue";
@@ -218,6 +206,7 @@ function generateMaze() {
     }
     ctx.stroke();
   };
+  document.getElementById("show-solution")!.onclick = showSolution;
 }
 
 function drawBoxImage(image: HTMLImageElement, x: number, y: number) {
@@ -266,8 +255,39 @@ window.onload = () => {
   (document.getElementById("maze-cols") as HTMLInputElement).value =
     DEFAULT_COLS.toString();
 
-  flagImage.src = "flag.png";
-  turtleImage.src = "turtle.png";
+  flagImage = document.getElementById("flag-img") as HTMLImageElement;
+  turtleImage = document.getElementById("turtle-img") as HTMLImageElement;
+  generateMaze();
+};
+
+function hideOtherStuff() {
+  let otherStuff = document.getElementById("other-stuff")!;
+  if (otherStuff.style.display == "none") {
+    otherStuff.style.display = "";
+  } else {
+    otherStuff.style.display = "none";
+  }
+}
+window.onkeydown = (e) => {
+  if (e.key == "ArrowLeft" || e.key == "a") {
+    moveCharacter(-1, 0);
+  } else if (e.key == "ArrowRight" || e.key == "d") {
+    moveCharacter(1, 0);
+  } else if (e.key == "ArrowUp" || e.key == "w") {
+    moveCharacter(0, -1);
+  } else if (e.key == "ArrowDown" || e.key == "s") {
+    moveCharacter(0, 1);
+  } else if (e.key == "g") {
+    generateMaze();
+  } else if (e.key == "l") {
+    showSolution();
+  } else if (e.key == "h") {
+    hideOtherStuff();
+  } else {
+    return;
+  }
+  e.preventDefault();
 };
 
 document.getElementById("generate-maze")!.onclick = generateMaze;
+document.getElementById("hide-other-stuff")!.onclick = hideOtherStuff;
