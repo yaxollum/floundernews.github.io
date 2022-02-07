@@ -221,15 +221,6 @@ window.onload = () => {
     turtleImage = document.getElementById("turtle-img");
     generateMaze();
 };
-function hideOtherStuff() {
-    let otherStuff = document.getElementById("other-stuff");
-    if (otherStuff.style.display == "none") {
-        otherStuff.style.display = "";
-    }
-    else {
-        otherStuff.style.display = "none";
-    }
-}
 window.onkeydown = (e) => {
     if (e.key == "ArrowLeft" || e.key == "a") {
         moveCharacter(-1, 0);
@@ -249,9 +240,6 @@ window.onkeydown = (e) => {
     else if (e.key == "l") {
         showSolution();
     }
-    else if (e.key == "h") {
-        hideOtherStuff();
-    }
     else {
         return;
     }
@@ -259,4 +247,3 @@ window.onkeydown = (e) => {
     c.scrollIntoView();
 };
 document.getElementById("generate-maze").onclick = generateMaze;
-document.getElementById("hide-other-stuff").onclick = hideOtherStuff;
