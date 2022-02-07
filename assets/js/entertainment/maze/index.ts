@@ -274,11 +274,24 @@ window.onkeydown = (e) => {
     generateMaze();
   } else if (e.key == "l") {
     showSolution();
+  } else if (e.key == "h") {
+    hideControls();
   } else {
     return;
   }
   e.preventDefault();
-  c.scrollIntoView();
+  document.getElementById("maze-container")!.scrollIntoView();
 };
 
 document.getElementById("generate-maze")!.onclick = generateMaze;
+
+function hideControls() {
+  let mazeControls = document.getElementById("maze-controls")!;
+  if (mazeControls.style.display == "none") {
+    mazeControls.style.display = "";
+  } else {
+    mazeControls.style.display = "none";
+  }
+}
+
+document.getElementById("hide-maze-controls")!.onclick = hideControls;
