@@ -19,23 +19,22 @@ layout: default
     function init() {
         let buttons = document.getElementsByClassName("ranking-button");
         let i = 1;
-        for (button of buttons) {
+        for (let button of buttons) {
             let j = i;
             button.onclick = () => showSlide(j);
             ++ i;
         }
-    } /*
+    }
 
     function showSlide(index) {
-        console.log(`showSlide called index ${index}`)
         let slides = document.getElementsByClassName("ranking-slide");
         let i = 1;
-        for (slide of slides) {
+        for (let slide of slides) {
             slide.style.display = (i == index)
                 ? ""
                 : "none";
             ++ i;
         }
     }
-    init();*/
+    init();
 </script>
