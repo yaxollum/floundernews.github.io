@@ -4,8 +4,8 @@ title: Hello
 image: "/assets/img/iq-test.png"
 imagedir: "/assets/img/hello"
 ranking:
-  - Apple: apple.png
-  - Orange: orange.png
-  - Banana: banana.png
-  - Durian: durian.png
+  - Apple: apple.jpg
+  - Orange: orange.jpg
+  - Banana: banana.jpg
+  - Durian: durian.jpg
 ---

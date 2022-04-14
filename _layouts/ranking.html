@@ -2,10 +2,40 @@
 layout: default
 ---
 
-{{page.imagedir}}
-<h2>Ranking</h2>
 {% for item in page.ranking %}
-    <h3>{{item|first|first}}</h3>
-    <p>Image:
-        {{item|first|last}}</p>
+    <button class="ranking-button">Show slide
+        {{forloop.index}}</button>
 {% endfor %}
+{% for item in page.ranking %}
+    <div class="ranking-slide" style="display:none">
+        {% assign headline=item|first|first %}
+        {% assign img_name=item|first|last %}
+        <h2>{{forloop.index|append:'. '|append:headline}}</h2>
+        <img src={{page.imagedir| append:'/'| append: img_name}}>
+    </div>
+{% endfor %}
+
+<script>
+    function init() {
+        let buttons = document.getElementsByClassName("ranking-button");
+        let i = 1;
+        for (button of buttons) {
+            let j = i;
+            button.onclick = () => showSlide(j);
+            ++ i;
+        }
+    } /*
+
+    function showSlide(index) {
+        console.log(`showSlide called index ${index}`)
+        let slides = document.getElementsByClassName("ranking-slide");
+        let i = 1;
+        for (slide of slides) {
+            slide.style.display = (i == index)
+                ? ""
+                : "none";
+            ++ i;
+        }
+    }
+    init();*/
+</script>
