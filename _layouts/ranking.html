@@ -1,0 +1,11 @@
+---
+layout: default
+---
+
+{{page.imagedir}}
+<h2>Ranking</h2>
+{% for item in page.ranking %}
+    <h3>{{item|first|first}}</h3>
+    <p>Image:
+        {{item|first|last}}</p>
+{% endfor %}
