@@ -1,6 +1,7 @@
 ---
 layout: ranking
 title: Hello
+description: Fun fruits
 image: "/assets/img/iq-test.png"
 imagedir: "/assets/img/hello"
 ranking:
