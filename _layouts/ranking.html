@@ -2,10 +2,8 @@
 layout: article
 ---
 
-{% for item in page.slides %}
-    <button class="ranking-button">Show slide
-        {{forloop.index}}</button>
-{% endfor %}
+<button id="ranking-prev">Previous</button>
+<button id="ranking-next">Next</button>
 
 {% for item in page.slides %}
     <div class="ranking-slide" style="display:none">
@@ -34,14 +32,39 @@ layout: article
 {% endfor %}
 
 <script>
+    let currentSlide=1,prevButton,nextButton;
     function init() {
-        let buttons = document.getElementsByClassName("ranking-button");
-        let i = 1;
-        for (let button of buttons) {
-            let j = i;
-            button.onclick = () => showSlide(j);
-            ++ i;
-        }
+        prevButton=document.getElementById("ranking-prev");
+        nextButton=document.getElementById("ranking-next");
+        prevButton.onclick=prevSlide;
+        nextButton.onclick=nextSlide;
+        window.onkeydown = (e) => {
+            if (e.key == "ArrowLeft") {
+                if(!prevButton.disabled) {
+                    prevSlide();
+                }
+            }
+            else if (e.key == "ArrowRight") {
+                if(!nextButton.disabled) {
+                    nextSlide();
+                }
+            }
+            else {
+                return;
+            }
+            e.preventDefault();
+        };
+        showSlide(1);
+    }
+
+    function prevSlide() {
+        --currentSlide;
+        showSlide(currentSlide);
+    }
+
+    function nextSlide() {
+        ++currentSlide;
+        showSlide(currentSlide);
     }
 
     function showSlide(index) {
@@ -53,6 +76,8 @@ layout: article
                 : "none";
             ++ i;
         }
+        prevButton.disabled=index==1;
+        nextButton.disabled=index==i-1;
     }
     init();
 </script>
