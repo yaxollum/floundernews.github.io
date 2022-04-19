@@ -8,15 +8,20 @@ layout: default
 {% endfor %}
 {% for item in page.ranking %}
     <div class="ranking-slide" style="display:none">
-        <p>{{item}}</p>
-        <p>{{item|first|first}}</p>
-        <p>{{item|first|last}}</p>
-        <p>{{item|first|last|first|first}}</p>
-        <p>{{item|first|last|first|last}}</p>
         {% assign headline=item|first|first %}
-        {% assign img_name=item|last|first %}
+        {% if item.first.last.first.first %}
+        {% assign img_name=item.first.last.first.first %}
+        {% else %}
+        {% assign img_name=item.first.last %}
+        {% endif %}
+
         <h2>{{forloop.index|append:'. '|append:headline}}</h2>
+        <figure>
         <img src={{page.imagedir| append:'/'| append: img_name}}>
+        {% if item.first.last.first.last %}
+        <figcaption>{{item.first.last.first.last}}</figcaption>
+        {% endif %}
+        </figure>
     </div>
 {% endfor %}
 
