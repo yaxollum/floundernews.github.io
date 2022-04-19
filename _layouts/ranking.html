@@ -2,11 +2,12 @@
 layout: article
 ---
 
-{% for item in page.ranking %}
+{% for item in page.slides %}
     <button class="ranking-button">Show slide
         {{forloop.index}}</button>
 {% endfor %}
-{% for item in page.ranking %}
+
+{% for item in page.slides %}
     <div class="ranking-slide" style="display:none">
         {% assign headline=item|first|first %}
         {% if item.first.last.first.first %}
@@ -15,7 +16,14 @@ layout: article
         {% assign img_name=item.first.last %}
         {% endif %}
 
+        {% if page.hascover %}
+            {% if forloop.index>1 %}
+            <h2>{{forloop.index|minus:1|append:'. '|append:headline}}</h2>
+            {% endif %}
+        {% else %}
         <h2>{{forloop.index|append:'. '|append:headline}}</h2>
+        {% endif %}
+
         <figure>
         <img src={{page.imagedir| append:'/'| append: img_name}}>
         {% if item.first.last.first.last %}
