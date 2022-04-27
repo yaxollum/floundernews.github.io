@@ -5,8 +5,8 @@ layout: article
 
 {% for item in page.slides %}
     <div class="ranking-slide" style="display:none">
-        <button class="ranking-prev">Previous</button>
-        <button class="ranking-next">Next</button>
+        <button class="ranking-prev">&#10094;</button>
+        <button class="ranking-next">&#10095;</button>
         {% assign headline=item|first|first %}
         {% if item.first.last.first.first %}
         {% assign img_name=item.first.last.first.first %}
