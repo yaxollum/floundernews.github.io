@@ -2,11 +2,11 @@
 layout: article
 ---
 
-<button id="ranking-prev">Previous</button>
-<button id="ranking-next">Next</button>
 
 {% for item in page.slides %}
     <div class="ranking-slide" style="display:none">
+        <button class="ranking-prev">Previous</button>
+        <button class="ranking-next">Next</button>
         {% assign headline=item|first|first %}
         {% if item.first.last.first.first %}
         {% assign img_name=item.first.last.first.first %}
@@ -32,39 +32,28 @@ layout: article
 {% endfor %}
 
 <script>
-    let currentSlide=1,prevButton,nextButton;
     function init() {
-        prevButton=document.getElementById("ranking-prev");
-        nextButton=document.getElementById("ranking-next");
-        prevButton.onclick=prevSlide;
-        nextButton.onclick=nextSlide;
-        window.onkeydown = (e) => {
-            if (e.key == "ArrowLeft") {
-                if(!prevButton.disabled) {
-                    prevSlide();
-                }
-            }
-            else if (e.key == "ArrowRight") {
-                if(!nextButton.disabled) {
-                    nextSlide();
-                }
-            }
-            else {
-                return;
-            }
-            e.preventDefault();
-        };
+        prevButtons=document.getElementsByClassName("ranking-prev");
+        nextButtons=document.getElementsByClassName("ranking-next");
+        let i = 1;
+        for (let prevButton of prevButtons) {
+            prevButton.style.display = (i != 1)
+                ? ""
+                : "none";
+            let j=i-1;
+            prevButton.onclick=()=>{showSlide(j)};
+            ++ i;
+        }
+        i = 1;
+        for (let nextButton of nextButtons) {
+            nextButton.style.display = (i != nextButtons.length)
+                ? ""
+                : "none";
+            let j=i+1;
+            nextButton.onclick=()=>{showSlide(j)};
+            ++ i;
+        }
         showSlide(1);
-    }
-
-    function prevSlide() {
-        --currentSlide;
-        showSlide(currentSlide);
-    }
-
-    function nextSlide() {
-        ++currentSlide;
-        showSlide(currentSlide);
     }
 
     function showSlide(index) {
@@ -76,8 +65,6 @@ layout: article
                 : "none";
             ++ i;
         }
-        prevButton.disabled=index==1;
-        nextButton.disabled=index==i-1;
     }
     init();
 </script>
