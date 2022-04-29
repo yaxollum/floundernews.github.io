@@ -2,46 +2,49 @@
 layout: article
 ---
 
-
 {% for item in page.slides %}
     <div class="ranking-slide" style="display:none">
-        <button class="ranking-prev">&#10094;</button>
-        <button class="ranking-next">&#10095;</button>
+
         {% assign headline=item|first|first %}
         {% if item.first.last.first.first %}
-        {% assign img_name=item.first.last.first.first %}
+            {% assign img_name=item.first.last.first.first %}
         {% else %}
-        {% assign img_name=item.first.last %}
+            {% assign img_name=item.first.last %}
         {% endif %}
 
         {% if page.hascover %}
             {% if forloop.index>1 %}
-            <h2>{{forloop.index|minus:1|append:'. '|append:headline}}</h2>
+                <h2>{{forloop.index|minus:1|append:'. '|append:headline}}</h2>
             {% endif %}
         {% else %}
-        <h2>{{forloop.index|append:'. '|append:headline}}</h2>
+            <h2>{{forloop.index|append:'. '|append:headline}}</h2>
         {% endif %}
-
-        <figure>
-        <img src={{page.imagedir| append:'/'| append: img_name}}>
-        {% if item.first.last.first.last %}
-        <figcaption>{{item.first.last.first.last}}</figcaption>
-        {% endif %}
-        </figure>
+        <div class="ranking-img-wrapper">
+            <button class="ranking-prev">&#10094;</button>
+            <button class="ranking-next">&#10095;</button>
+            <figure class="ranking-figure">
+                <img class="ranking-img" src={{page.imagedir| append:'/'| append: img_name}}>
+                {% if item.first.last.first.last %}
+                    <figcaption>{{item.first.last.first.last}}</figcaption>
+                {% endif %}
+            </figure>
+        </div>
     </div>
 {% endfor %}
 
 <script>
     function init() {
-        prevButtons=document.getElementsByClassName("ranking-prev");
-        nextButtons=document.getElementsByClassName("ranking-next");
+        prevButtons = document.getElementsByClassName("ranking-prev");
+        nextButtons = document.getElementsByClassName("ranking-next");
         let i = 1;
         for (let prevButton of prevButtons) {
             prevButton.style.display = (i != 1)
                 ? ""
                 : "none";
-            let j=i-1;
-            prevButton.onclick=()=>{showSlide(j)};
+            let j = i - 1;
+            prevButton.onclick = () => {
+                showSlide(j)
+            };
             ++ i;
         }
         i = 1;
@@ -49,8 +52,10 @@ layout: article
             nextButton.style.display = (i != nextButtons.length)
                 ? ""
                 : "none";
-            let j=i+1;
-            nextButton.onclick=()=>{showSlide(j)};
+            let j = i + 1;
+            nextButton.onclick = () => {
+                showSlide(j)
+            };
             ++ i;
         }
         showSlide(1);
