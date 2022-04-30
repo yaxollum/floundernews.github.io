@@ -2,74 +2,92 @@
 layout: article
 ---
 
-{% for item in page.slides %}
-    <div class="ranking-slide" style="display:none">
+<div class="ranking-button-container">
+    {% for item in page.slides %}
+        <button class="ranking-button">
+            {% if page.hascover %}
+                {% if forloop.index>1 %}
+                    {{forloop.index|minus:1}}
+                {%
+  else %}
+                    <!-- home icon created by:"Roy Pfund";
+	License:"http://creativecommons.org/licenses/publicdomain/"; -->
+                    <svg version="1.1" viewbox="0 0 512 512" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:svg="http://www.w3.org/2000/svg" xmlns="http://www.w3.org/2000/svg">
+                        <g transform="translate(0,448)">
+                            <path d="m 16,256 240,-192 96,72 0,-32 48,0 0,72 96,80 -48,0 0,192 -120,0 0,-160 -96,0 0,160 -168,0 0,-192 z" style="fill:currentColor;fill-opacity:1;stroke:currentColor;stroke-width:12;stroke-linecap:butt;stroke-linejoin:round;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none" transform="translate(0,-448)"/>
+                        </g>
+                    </svg>
+                {% endif %}
+            {% else %}
+                {{forloop.index}}
+            {% endif %}
+        </button>
+    {% endfor %}
+    <button class="ranking-button show-all">Expand All</button>
+</div>
 
+{% for item in page.slides %}
+    <div class="ranking-slide" style="display: none">
         {% assign headline=item|first|first %}
         {% if item.first.last.first.first %}
-            {% assign img_name=item.first.last.first.first %}
+            {%
+  assign img_name=item.first.last.first.first %}
         {% else %}
-            {% assign img_name=item.first.last %}
+            {% assign
+  img_name=item.first.last %}
         {% endif %}
-
         {% if page.hascover %}
-            {% if forloop.index>1 %}
+            {% if
+  forloop.index>1 %}
                 <h2>{{forloop.index|minus:1|append:'. '|append:headline}}</h2>
             {% endif %}
         {% else %}
             <h2>{{forloop.index|append:'. '|append:headline}}</h2>
         {% endif %}
-        <div class="ranking-img-wrapper">
-            <button class="ranking-prev">&#10094;</button>
-            <button class="ranking-next">&#10095;</button>
-            <figure class="ranking-figure">
-                <img class="ranking-img" src={{page.imagedir| append:'/'| append: img_name}}>
-                {% if item.first.last.first.last %}
-                    <figcaption>{{item.first.last.first.last}}</figcaption>
-                {% endif %}
-            </figure>
-        </div>
+
+        <figure>
+            <img class="ranking-img" src={{page.imagedir| append:'/'| append: img_name}}>
+            {% if item.first.last.first.last %}
+                <figcaption>{{item.first.last.first.last}}</figcaption>
+            {% endif %}
+        </figure>
+
     </div>
 {% endfor %}
 
 <script>
-    function init() {
-        prevButtons = document.getElementsByClassName("ranking-prev");
-        nextButtons = document.getElementsByClassName("ranking-next");
-        let i = 1;
-        for (let prevButton of prevButtons) {
-            prevButton.style.display = (i != 1)
-                ? ""
-                : "none";
-            let j = i - 1;
-            prevButton.onclick = () => {
-                showSlide(j)
-            };
-            ++ i;
-        }
-        i = 1;
-        for (let nextButton of nextButtons) {
-            nextButton.style.display = (i != nextButtons.length)
-                ? ""
-                : "none";
-            let j = i + 1;
-            nextButton.onclick = () => {
-                showSlide(j)
-            };
-            ++ i;
-        }
-        showSlide(1);
+  function init() {
+    let buttons = document.getElementsByClassName("ranking-button");
+    let i = 1;
+    for (let button of buttons) {
+      let j = i;
+      button.onclick = () => {
+        showSlide(j);
+      };
+      ++i;
     }
+    showSlide(1);
+  }
 
-    function showSlide(index) {
-        let slides = document.getElementsByClassName("ranking-slide");
-        let i = 1;
-        for (let slide of slides) {
-            slide.style.display = (i == index)
-                ? ""
-                : "none";
-            ++ i;
-        }
+  function showSlide(index) {
+    let slides = document.getElementsByClassName("ranking-slide");
+    let buttons = document.getElementsByClassName("ranking-button");
+
+    let showAll=index==slides.length+1;
+    let i = 1;
+    for (let slide of slides) {
+      slide.style.display = (i == index||showAll) ? "" : "none";
+      ++i;
     }
-    init();
+    i=1;
+    for (let button of buttons) {
+      if(i==index){
+          button.classList.add("selected");
+      }else{
+        button.classList.remove("selected");
+      }
+      ++i;
+    }
+  }
+  init();
 </script>
