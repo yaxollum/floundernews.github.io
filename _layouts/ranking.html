@@ -3,7 +3,7 @@ layout: article
 ---
 
 <div class="ranking-content" id="ranking-content">
-  <div class="ranking-button-container">
+  <div class="ranking-button-container" id="ranking-button-container">
     {% for item in page.slides %}
     <button class="ranking-button">
       {% if page.hascover %} {% if forloop.index>1 %} {{forloop.index|minus:1}}
