@@ -1,4 +1,4 @@
-.article-wrapper {
+.ranking-content {
     display: flex;
     flex-direction: column;
     width: 100%;
@@ -52,6 +52,10 @@
         max-height: 100vh;
         display: flex;
         flex-direction: column;
+
+        &.hide {
+            display: none;
+        }
 
         h2 {
             margin-bottom: 5px;
