@@ -7,18 +7,19 @@ image: "/assets/img/hello/fruits.jpg"
 imagedir: "/assets/img/hello"
 slides:
   - Cover Slide: fruits.jpg
-  - Apple: {apple.jpg: apples are red}
+  - Chimney: { chimney.jpg: chimneys are tall }
+  - Apple: { apple.jpg: apples are red }
   - Orange: { orange.jpg: optional description goes here }
   - Banana: { banana.jpg }
-  - {Durian: durian.jpg}
+  - { Durian: durian.jpg }
   - Cover Slide: fruits.jpg
   - Apple: apple.jpg
   - Orange: { orange.jpg: optional description goes here }
   - Banana: { banana.jpg }
-  - {Durian: durian.jpg}
+  - { Durian: durian.jpg }
   - Cover Slide: fruits.jpg
   - Apple: apple.jpg
   - Orange: { orange.jpg: optional description goes here }
   - Banana: { banana.jpg }
-  - {Durian: durian.jpg}
+  - { Durian: durian.jpg }
 ---
