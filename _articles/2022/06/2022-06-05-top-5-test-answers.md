@@ -1,10 +1,10 @@
 ---
 layout: ranking
-title: "Top 5 answers to your next test"
+title: "Top 5 Answers to Your Next Test"
 image:
 order:
 
-imagedir: "/assets/img/2022/06/2022-06-05-top-5-answers"
+imagedir: "/assets/img/2022/06/2022-06-05-top-5-test-answers"
 slides:
   - A:
       {
