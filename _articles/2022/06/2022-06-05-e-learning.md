@@ -2,7 +2,7 @@
 layout: article
 author: "Notaching G. Rass"
 title: "New e-Learning Courses Are All the Craze at Mackenzie"
-description: "I must say, this novel channel of education is truly exquisite."
+description: “I must say, this novel channel of education is truly exquisite.”
 image: /assets/img/2022/06/2022-06-05-elearning.png
 order:
 ---

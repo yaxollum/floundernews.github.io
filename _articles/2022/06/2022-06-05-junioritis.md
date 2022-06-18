@@ -2,7 +2,7 @@
 layout: article
 author: "Weir M. Asks"
 title: "New strain of senioritis discovered; adolescent teens now most at risk."
-description: "I can't believe it's not aging!"
+description: “I can't believe it's not aging!”
 image: /assets/img/2022/06/2022-06-05-junioritis.png
 order:
 ---
