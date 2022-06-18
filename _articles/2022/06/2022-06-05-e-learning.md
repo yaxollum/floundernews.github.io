@@ -3,7 +3,7 @@ layout: article
 author: "Notaching G. Rass"
 title: "New e-Learning Courses Are All the Craze at Mackenzie"
 description: "I must say, this novel channel of education is truly exquisite."
-image:
+image: /assets/img/2022/06/2022-06-05-elearning.png
 order:
 ---
 
@@ -24,3 +24,5 @@ Our proud Lyons have also taken to social media to spread the love of e-Learning
 average sigma e-learner”
 
 It certainly seems e-Learning has established itself as the next big obsession within Mackenzie.
+
+{% include image.html image=page.image %}

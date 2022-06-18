@@ -3,7 +3,7 @@ layout: article
 author: "Peter Cottontail"
 title: "Mackenzie Calls Exterminators for Undetected Easter Bunny Infestation"
 description: “They really do breed like rabbits.”
-image:
+image: /assets/img/2022/06/2022-06-05-unexpeggted.png
 order:
 ---
 
@@ -18,3 +18,5 @@ Understanding the severity of the situation, specialized exterminators were imme
 After many of the bunnies had been burned, the elite team arrived to cut off the source of the bunnies: the elusive easter eggs. The remaining fires were promptly put out to ensure the safety of the team. All along the walls, melted chocolate oozed to the floor proving to be a distraction hazard. Still, the local daycare kids were let loose inside the building under the premise of an easter egg hunt and in under an impressive hour, they had all been found. Congratulations to Bobby for taking home the gold medal for this hunt.
 
 Thanks to the swift action of the school in tandem with the extermination team, the Easter infestation was quickly dealt with. An email communication was later sent to all parents and students promising that this affair will never happen again. Unfortunately, as if asking for another outbreak, the animal breeding department secretly kept a few Easter eggs citing their reason as “studying purposes.”
+
+{% include image.html image=page.image %}
