@@ -1,4 +1,4 @@
-﻿---
+---
 layout: article
 author: "Daig Fard"
 title: "Schools Shift to Giving Marks by Lottery to Promote Equity and Learning"
@@ -18,5 +18,4 @@ While most of the grade twelves concur, a small minority of lower grades grade e
 
 "While I think making marks completely random and in no way reflective of your abilities is quite practical, a lottery is just a boring way to do so; it's so old-fashioned," commented Bob, a Grade 9 student. Bob and other students are pushing to use random number generators instead. Many of them even sent their own programs to use in lieu of the lottery system.
 
-At the time of writing, Flounder personnel found the current course median for the majority of courses to be 50%, a sharp plummet from before the change. Teachers who opted to use student programs for random number generation, however, saw a 17% increase in students’ averages..
-
+At the time of writing, Flounder personnel found the current course median for the majority of courses to be 50%, a sharp plummet from before the change. Teachers who opted to use student programs for random number generation, however, saw a 17% increase in students’ averages.
