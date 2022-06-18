@@ -1,6 +1,6 @@
 ---
 layout: article
-title: "xxxxxxxxxx"
+title: "Waste of a Break"
 image: /assets/img/2022/06/2022-06-05-waste-of-a-break.png
 order:
 ---
