@@ -53,13 +53,14 @@ layout: article
             {% else %}
                 <h2>{{forloop.index|append:'. '|append:headline}}</h2>
             {% endif %}
-
+            {% if img_name %}
             <figure>
                 <img class="ranking-img" src={{page.imagedir| append:'/'| append: img_name}}>
                 {% if item.first.last.first.last %}
                     <figcaption>{{item.first.last.first.last}}</figcaption>
                 {% endif %}
             </figure>
+            {% endif %}
         </div>
     {% endfor %}
 </div>
