@@ -74,7 +74,7 @@ layout: default
             {% endif %}
             {% if img_name %}
             <figure>
-                <img class="ranking-img" src={{article.imagedir| append:'/'| append: img_name}}>
+                <img class="ranking-img" src="{{article.imagedir| append:'/'| append: img_name}}">
                 {% if item.first.last.first.last %}
                     <figcaption>{{item.first.last.first.last}}</figcaption>
                 {% endif %}
