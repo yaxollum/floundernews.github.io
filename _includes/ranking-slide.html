@@ -1,0 +1,31 @@
+{% if include.heading_level %}
+{% assign heading_level=include.heading_level %}
+{% else %}
+{% assign heading_level="h2" %}
+{% endif %}
+
+<div class="ranking-slide">
+    {% assign headline=item|first|first %}
+    {% if item.first.last.first.first %}
+        {% assign img_name=item.first.last.first.first %}
+    {% else %}
+        {% assign
+img_name=item.first.last %}
+    {% endif %}
+    {% if include.main.hascover %}
+        {% if
+forloop.index>1 %}
+            <{{heading_level}}>{{forloop.index|minus:1|append:'. '|append:headline}}</{{heading_level}}>
+        {% endif %}
+    {% else %}
+        <{{heading_level}}>{{forloop.index|append:'. '|append:headline}}</{{heading_level}}>
+    {% endif %}
+    {% if img_name %}
+    <figure>
+        <img class="ranking-img" src="{{include.main.imagedir| append:'/'| append: img_name}}">
+        {% if item.first.last.first.last %}
+            <figcaption>{{item.first.last.first.last}}</figcaption>
+        {% endif %}
+    </figure>
+    {% endif %}
+</div>
